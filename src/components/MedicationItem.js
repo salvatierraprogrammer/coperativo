@@ -1,16 +1,22 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import { colors } from '../theme/colors';
+import { useWindowDimensions } from "react-native";
 
-const MedicationItem = ({ item } ) => {
+const MedicationItem = ({ item, navigation } ) => {
+  const { height, width } = useWindowDimensions();
+  
+
   return (
     <View style={styles.container}>
-    {/* <Pressable onPress={() => console.log("Botn")} > */}
-      <Text style={styles.textItem}> {item.usuario} </Text>
+      <Pressable onPress={()=> navigation.navigate("medicacionDetail", { selectedItem: item })}>
+      <Text style={width < 300 ? styles.textMin : styles.textItem}> 
+        {item.usuario} 
+      </Text>
       <Image tyle={styles.image} height={80} width={80} source={{ uri: item.images[0] }} 
       resizeMode="cover"
       />
-      {/* </Pressable> */}
+      </Pressable>
     </View>
   );
 };
@@ -35,6 +41,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         width: "70%",
         alignItems: "center",
+        marginTop: 50,
       },
       image:{
         marginRight: 10,

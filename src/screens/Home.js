@@ -1,22 +1,31 @@
 import React from 'react';
-import { StyleSheet, ScrollView, Dimensions, Pressable, View, SafeAreaView } from 'react-native';
+import { StyleSheet, FlatList, Dimensions, Pressable, View, SafeAreaView } from 'react-native';
 import Header from '../components/Header';
-import Categories from '../components/Categories';
 import MedicationElement from '../components/MedicationElement';
+import { useWindowDimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { categories } from '../data/categories';
+import CategoryElemnt from '../components/CategoryElemnt';
+import { colors } from '../theme/colors';
 
+const Home = ({ navigation }) => {
 
-const Home = () => {
   return (
     <SafeAreaView style={{ marginTop: 15 }}>
-    
-      <Header title="Home"/>
-
-      <View style={styles.container} >
+      <Header title="Home" navigation={navigation}/>
+       <View style={styles.container} >
         <View style={styles.wideBox}>
            <Pressable onPress={() => console.log("Ver Medicacion")}>
              <MedicationElement/>
            </Pressable>
-           <Categories />
+           <View>
+           <FlatList
+              data={categories}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+              <CategoryElemnt navigation={navigation} item={item} /> )}
+            />
+            </View>
         </View>
       </View>
     </SafeAreaView>
@@ -38,7 +47,6 @@ const styles = StyleSheet.create({
   },
   wideBox: {
     backgroundColor: 'blue',
-    
     padding: 16,
     height: 500,
     marginBottom: 16,

@@ -1,20 +1,20 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View, Image } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
-import Shearch from '../components/Shearch';
+import Search from '../components/Search';
 import { medicacions } from '../data/medicacions';
 import MedicationItem from '../components/MedicationItem';
+import { AntDesign } from "@expo/vector-icons";
+import { colors } from '../theme/colors';
 
-const Medication = ( {category} ) => {
+const Medication = ( { route, navigation} ) => {
   const [categoryMedicat, setCategoryMedicat] = useState([]);
   const [text, setText] = useState(null);
-
-  
-  console.log("TEXTO", text);
-  console.log("CategoryMedi", categoryMedicat);
+  const {item} = route.params;
+  // console.log(item);
 
   useEffect(() => {
-    const categoryMedications = medicacions.filter((el) => el.category === category);
+    const categoryMedications = medicacions.filter((el) => el.category === item);
     setCategoryMedicat(categoryMedications); 
     
     if (text) {
@@ -25,22 +25,28 @@ const Medication = ( {category} ) => {
       setCategoryMedicat(titleMedic);
     }
     
-  }, [category, text]);
+  }, [text, item]);
   
   return (
     <SafeAreaView>
-        <Header title="Medicacion"/>
-        <Shearch text={text} setText={setText} />
-
+        <Header title={item.name}/>
+        <Search text={text} setText={setText} />
+        <Pressable 
+        style={{ marginLeft: 15, marginBottom: 10 }}
+        onPress={() => navigation.goBack()}>
+          <AntDesign name="caretleft" size={24} color={colors.mediumBlue} />
+      
+     </Pressable>
         <FlatList 
             data={categoryMedicat} 
             keyExtractor={medicacions.id}
-            renderItem={({ item }) => <MedicationItem item={item} />}
+            renderItem={({ item }) => 
+            <MedicationItem navigation={navigation} item={item} />}
         />
         
     </SafeAreaView>
-  )
-}
+  );
+};
 
 
 

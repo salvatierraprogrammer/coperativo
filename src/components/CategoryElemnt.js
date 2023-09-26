@@ -2,11 +2,12 @@ import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import React from 'react';
 import { colors } from '../theme/colors';
 
-const CategoryElement = ({ item }) => {
+const CategoryElement = ({ item, navigation }) => {
+  
   return (
     <View style={styles.row}>
       <View style={styles.box}>
-        <Pressable onPress={() => console.log("Ver Asistencia")}>
+        <Pressable onPress={() => navigation.navigate("medication",  { item: item})}>
           <View style={styles.containerBox}>
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.text}>{item.name}</Text>
