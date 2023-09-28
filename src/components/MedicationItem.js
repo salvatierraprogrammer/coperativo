@@ -2,14 +2,20 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import { colors } from '../theme/colors';
 import { useWindowDimensions } from "react-native";
+import { useDispatch } from "react-redux";
+import { setMedicationsSelected } from '../redux/slice/homeSlice';
 
 const MedicationItem = ({ item, navigation } ) => {
   const { height, width } = useWindowDimensions();
-  
+  const dispatch = useDispatch();
 
+  const onHandleMedicationsDetail = () => {
+   dispatch(setMedicationsSelected(item));
+    navigation.navigate("medicacionDetail");
+  }
   return (
     <View style={styles.container}>
-      <Pressable onPress={()=> navigation.navigate("medicacionDetail", { selectedItem: item })}>
+      <Pressable onPress={()=> onHandleMedicationsDetail()}>
       <Text style={width < 300 ? styles.textMin : styles.textItem}> 
         {item.usuario} 
       </Text>

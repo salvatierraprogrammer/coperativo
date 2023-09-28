@@ -1,25 +1,25 @@
 import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
 import React from 'react';
 import { colors } from '../theme/colors';
-import setCategory from '../redux/slice/homeSlice';
+import { setCategory } from '../redux/slice/homeSlice';
 import { useDispatch } from 'react-redux';
 
 const CategoryElement = ({ item, navigation }) => {
   
-  const dispatch = useDispatch(); 
+    const dispatch = useDispatch(); 
 
     const onHandleItem = () => {
       dispatch(setCategory(item));
-
-      navigation.navigate("medicacions", {item: item});
+      navigation.navigate("medications", { item: item });
     };
+
   return (
     <View style={styles.row}>
       <View style={styles.box}>
         <Pressable onPress={() => onHandleItem()}>
           <View style={styles.containerBox}>
-            {/* <Image source={{ uri: item.image }} style={styles.image} /> */}
-            <Text style={styles.text}>{item}</Text>
+            <Image source={{ uri: item.image }} style={styles.image} /> 
+            <Text style={styles.text}>{item.name}</Text>
           </View>
         </Pressable>
       </View>

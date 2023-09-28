@@ -12,19 +12,20 @@ const Medication = ( { route, navigation} ) => {
   const [text, setText] = useState(null);
   const {item} = route.params;
 
-  const medicacions = useSelector(state => state.homeSlice.allMedicacions );
-  console.log("Mecicaciones", medicacions);
-  // console.log(item);
+  const medicacions = useSelector((state) => state.homeSlice.allMedicacions );
+  
+  const medicationsFilterByCategory = useSelector(
+    (state) => state.homeSlice.medicationsFilterByCategory
+  );
+  // console.log(medicationsFilterByCategory);
 
   useEffect(() => {
-    const categoryMedications = medicacions.filter((el) => el.category === item);
-    setCategoryMedicat(categoryMedications); 
+    setCategoryMedicat(medicationsFilterByCategory); 
     
     if (text) {
       const titleMedic = medicacions.filter(
         (el) => el.usuario.toLowerCase() === text.toLowerCase()
         );
-      console.log(titleMedic);
       setCategoryMedicat(titleMedic);
     }
     
@@ -32,14 +33,13 @@ const Medication = ( { route, navigation} ) => {
   
   return (
     <SafeAreaView>
-        <Header title={item.name}/>
-        <Search text={text} setText={setText} />
+        <Header title={item.name} navigation={navigation}/>
         <Pressable 
         style={{ marginLeft: 15, marginBottom: 10 }}
         onPress={() => navigation.goBack()}>
           <AntDesign name="caretleft" size={24} color={colors.mediumBlue} />
-      
      </Pressable>
+     <Search text={text} setText={setText} />
         <FlatList 
             data={categoryMedicat} 
             keyExtractor={medicacions.id}

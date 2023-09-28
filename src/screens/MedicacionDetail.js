@@ -4,10 +4,14 @@ import { medicacions } from '../data/medicacions';
 import Header from '../components/Header';
 import { AntDesign } from '@expo/vector-icons';  
 import { colors } from '../theme/colors';
+import { useSelector } from 'react-redux';
 
  
 const MedicacionDetail = ( { route, navigation} ) => {
-    const selectedItem =route.params.selectedItem;
+    // const selectedItem =route.params.selectedItem;
+
+    const medicacionsSelected = useSelector
+    (state => state.homeSlice.medicacionsSelected);
 
   return (
     <SafeAreaView>
@@ -15,27 +19,27 @@ const MedicacionDetail = ( { route, navigation} ) => {
       <View style={styles.containerImage}>
       <Image 
         style={styles.image}
-        source={{ uri: selectedItem.images[0], }}
+        source={{ uri: medicacionsSelected.images[0], }}
         // source={{ uri: medicacions[0].images,  }}
       />
       <View style={styles.containerMedicacion}>
          <Text style={styles.cardTitle}>Plan Famrmacologico</Text>
          <View style={styles.cardContainer}>
-            <Text style={styles.cardTitle}> {selectedItem.medicacionManiana}
+            <Text style={styles.cardTitle}> {medicacionsSelected.medicacionManiana}
             </Text>
-            <Text style={styles.cardText}>{selectedItem.planFamrmacologicoMa}</Text>
+            <Text style={styles.cardText}>{medicacionsSelected.planFamrmacologicoMa}</Text>
          </View>
          <View style={styles.cardContainer}>
-            <Text style={styles.cardTitle}>{selectedItem.medicacionMedidiodia}</Text>
-            <Text style={styles.cardText}>{selectedItem.planFamrmacologicoMe}</Text>
+            <Text style={styles.cardTitle}>{medicacionsSelected.medicacionMedidiodia}</Text>
+            <Text style={styles.cardText}>{medicacionsSelected.planFamrmacologicoMe}</Text>
          </View>
          <View style={styles.cardContainer}>
-            <Text style={styles.cardTitle}>{selectedItem.medicacionTarde}</Text>
-            <Text style={styles.cardText}>{selectedItem.planFamrmacologicoT}</Text>
+            <Text style={styles.cardTitle}>{medicacionsSelected.medicacionTarde}</Text>
+            <Text style={styles.cardText}>{medicacionsSelected.planFamrmacologicoT}</Text>
          </View>
          <View style={styles.cardContainer}>
-            <Text style={styles.cardTitle}>{selectedItem.medicacionNoche}</Text>
-            <Text style={styles.cardText}>{selectedItem.planFamrmacologicoN}</Text>
+            <Text style={styles.cardTitle}>{medicacionsSelected.medicacionNoche}</Text>
+            <Text style={styles.cardText}>{medicacionsSelected.planFamrmacologicoN}</Text>
          </View>
       </View>
 

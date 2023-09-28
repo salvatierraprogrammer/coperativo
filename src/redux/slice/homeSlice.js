@@ -8,12 +8,22 @@ const homeSlice = createSlice({
         allCategories: categories,
         allMedicacions: medicacions,
         categorySelected: "",
+        medicationsFilterByCategory: [],
+        medicacionsSelected: {}, 
     },
     reducers: {
         setCategory: (state, action) => {
-            state.categorySelected = action.payload;
+        state.categorySelected = action.payload;
+
+        state.medicationsFilterByCategory = state.allMedicacions.filter(
+            (el) => el.category === state.categorySelected 
+            );
         },
+
+        setMedicationsSelected: (state, action) => { 
+            state.medicacionsSelected = action.payload;
+         },
     },
 });
-export const { setCategory } = homeSlice.actions;
+export const { setCategory,  setMedicationsSelected } = homeSlice.actions;
 export default homeSlice.reducer;
