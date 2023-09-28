@@ -5,6 +5,7 @@ import RootNavigation from './RootNavigation';
 import Profile from '../screens/Profile';
 import { Entypo } from '@expo/vector-icons'; 
 
+
 const Tab = createBottomTabNavigator();
 
 const TabNav = () => {

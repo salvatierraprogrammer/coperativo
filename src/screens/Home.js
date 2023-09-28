@@ -7,9 +7,12 @@ import { useNavigation } from '@react-navigation/native';
 import { categories } from '../data/categories';
 import CategoryElemnt from '../components/CategoryElemnt';
 import { colors } from '../theme/colors';
+import { useSelector } from 'react-redux';
 
 const Home = ({ navigation }) => {
 
+  const categories = useSelector( state=> state.homeSlice.allCategories);
+  console.log("Categorias", categories)
   return (
     <SafeAreaView style={{ marginTop: 15 }}>
       <Header title="Home" navigation={navigation}/>
@@ -21,7 +24,7 @@ const Home = ({ navigation }) => {
            <View>
            <FlatList
               data={categories}
-              keyExtractor={(item) => item}
+              keyExtractor={(key) => key}
               renderItem={({ item }) => (
               <CategoryElemnt navigation={navigation} item={item} /> )}
             />
@@ -44,6 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 24,
     textAlign: 'center',
+    fontFamily: "DancingBold",
   },
   wideBox: {
     backgroundColor: 'blue',

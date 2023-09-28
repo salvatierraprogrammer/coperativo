@@ -2,15 +2,18 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View, Image, Pressable } from
 import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
 import Search from '../components/Search';
-import { medicacions } from '../data/medicacions';
 import MedicationItem from '../components/MedicationItem';
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from '../theme/colors';
+import { useSelector } from 'react-redux';
 
 const Medication = ( { route, navigation} ) => {
   const [categoryMedicat, setCategoryMedicat] = useState([]);
   const [text, setText] = useState(null);
   const {item} = route.params;
+
+  const medicacions = useSelector(state => state.homeSlice.allMedicacions );
+  console.log("Mecicaciones", medicacions);
   // console.log(item);
 
   useEffect(() => {

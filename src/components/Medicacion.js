@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { colors } from '../theme/colors';
-import medicacion from '../data/medicacion';
+import medicacion from '../data/medicacions';
 
 const MedicationElement = () => {
   return (

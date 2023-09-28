@@ -30,11 +30,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     shadowColor: '#000',
     marginBottom: 200,
-    height: 150,
+    
     width: "100%",
     shadowOffset: {
-      width: 0,
-      height: 4,
+      width: 2,
+      height: 6,
     },
     shadowOpacity: 0.2,
     shadowRadius: 2,
@@ -45,10 +45,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderRadius: 10,
 
+    height: "auto",
+
   },
   cardContainer: {
     flex: 1, 
-    padding: 8, 
+    padding: 10, 
     backgroundColor: colors.lightBlue,
     width: 200,
     height: 200,
