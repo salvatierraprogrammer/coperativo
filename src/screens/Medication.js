@@ -6,6 +6,9 @@ import MedicationItem from '../components/MedicationItem';
 import { AntDesign } from "@expo/vector-icons";
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
+import { useGetMedicacionsQuery } from '../services/ecApi';
+
+
 
 const Medication = ( { route, navigation} ) => {
   const [categoryMedicat, setCategoryMedicat] = useState([]);
@@ -14,6 +17,11 @@ const Medication = ( { route, navigation} ) => {
 
   const medicacions = useSelector((state) => state.homeSlice.allMedicacions );
   
+const {data, isLoading, isError } = useGetMedicacionsQuery();
+
+console.log(data);
+
+
   const medicationsFilterByCategory = useSelector(
     (state) => state.homeSlice.medicationsFilterByCategory
   );

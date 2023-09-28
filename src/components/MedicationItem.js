@@ -10,7 +10,9 @@ const MedicationItem = ({ item, navigation } ) => {
   const dispatch = useDispatch();
 
   const onHandleMedicationsDetail = () => {
-   dispatch(setMedicationsSelected(item));
+   
+    dispatch(setMedicationsSelected(item));
+
     navigation.navigate("medicacionDetail");
   }
   return (

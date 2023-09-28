@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList, Dimensions, Pressable, View, SafeAreaView } from 'react-native';
+import { StyleSheet, FlatList, Dimensions, Pressable, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import Header from '../components/Header';
 import MedicationElement from '../components/MedicationElement';
 import { useWindowDimensions } from 'react-native';
@@ -8,29 +8,45 @@ import { categories } from '../data/categories';
 import CategoryElemnt from '../components/CategoryElemnt';
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
+import { useGetCategoriesQuery } from '../services/ecApi';
 
 const Home = ({ navigation }) => {
+  // const categories = useSelector(state => state.homeSlice.allCategories);
 
-  const categories = useSelector( state=> state.homeSlice.allCategories);
-  console.log("Categorias", categories)
+  const { data: categories, isLoading, isError, error, } = useGetCategoriesQuery();
+  // const categories = datos.data;
+  console.log(categories);
+  // const isLoading = false;
   return (
-    <SafeAreaView style={{ marginTop: 15 }}>
-      <Header title="Home" navigation={navigation}/>
-       <View style={styles.container} >
-        <View style={styles.wideBox}>
-           <Pressable onPress={() => console.log("Ver Medicacion")}>
-             <MedicationElement/>
-           </Pressable>
-           <View>
-           <FlatList
-              data={categories}
-              keyExtractor={(key) => key}
-              renderItem={({ item }) => (
-              <CategoryElemnt navigation={navigation} item={item} /> )}
-            />
-            </View>
-        </View>
-      </View>
+    <SafeAreaView style={{ marginTop: 15, flex: 1 }}>
+  { isLoading ? (
+    <View 
+    style={{ flex:1, justifyContent: "center", alignContent: "center" }}
+    >
+    <ActivityIndicator size="large" color="#0000ff" /> 
+    </View>
+  ) : (
+  <>
+  <Header title="Home" navigation={navigation}/>
+  <View style={styles.container} >
+   <View style={styles.wideBox}>
+      <Pressable onPress={() => console.log("Ver Medicacion")}>
+        <MedicationElement/>
+      </Pressable>
+      <View>
+      <FlatList
+       data={categories}
+       keyExtractor={(item) => item.name} // Utiliza item.name como clave única
+       renderItem={({ item }) => (
+         <CategoryElemnt navigation={navigation} item={item} />
+       )}
+     />
+       </View>
+   </View>
+ </View>
+  </>
+  )}
+     
     </SafeAreaView>
   );
 };
