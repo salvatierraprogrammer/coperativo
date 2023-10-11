@@ -9,6 +9,10 @@ import RootNavigation from './src/navigation/RootNavigation';
 import TabNav from './src/navigation/TabNav';
 import { store } from './src/redux/store';
 import { Provider } from 'react-redux';
+import Registre from './src/screens/Registre';
+import Login from './src/screens/Login';
+import AuthNav from './src/navigation/AuthNav';
+import MainNav from './src/navigation/MainNav';
 
 export default function App() {
 
@@ -24,10 +28,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
-    <NavigationContainer>
-      <TabNav/>
-    </NavigationContainer>
+      <MainNav/>
     </Provider>
+   
   );
 };
 

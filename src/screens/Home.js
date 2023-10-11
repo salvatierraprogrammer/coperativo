@@ -20,8 +20,7 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={{ marginTop: 15, flex: 1 }}>
   { isLoading ? (
-    <View 
-    style={{ flex:1, justifyContent: "center", alignContent: "center" }}
+    <View  style={{ flex:1, justifyContent: "center", alignContent: "center" }}
     >
     <ActivityIndicator size="large" color="#0000ff" /> 
     </View>
@@ -30,9 +29,9 @@ const Home = ({ navigation }) => {
   <Header title="Home" navigation={navigation}/>
   <View style={styles.container} >
    <View style={styles.wideBox}>
-      <Pressable onPress={() => console.log("Ver Medicacion")}>
+      {/* <Pressable onPress={() => console.log("Ver Medicacion")}> */}
         <MedicationElement/>
-      </Pressable>
+      {/* </Pressable> */}
       <View>
       <FlatList
        data={categories}
