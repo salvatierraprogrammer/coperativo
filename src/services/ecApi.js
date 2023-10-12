@@ -16,8 +16,22 @@ export const ecApi = createApi({
     getMedicacions: builder.query({
       query: () => "medicacions.json",
         }),
+           // ACCESO A LA IMAGEN EN LA BD
+    getImage: builder.query({
+        query: () => "image.json",
+      }),
+  
+      // ENVIA LA IMAGEN A LA BD
+      putImage: builder.mutation({
+        query: (image) => ({
+          url: "image.json",
+          method: "PUT",
+          body: image,
+        }),
+      }),
     }),
-});
+  });
+  
 
-export const { useGetCategoriesQuery, useGetMedicacionsQuery } = ecApi; 
+export const { useGetCategoriesQuery, useGetMedicacionsQuery, useGetImageQuery, usePutImageMutation } = ecApi; 
 

@@ -14,20 +14,20 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { colors } from "../theme/colors";
 import * as ImagePicker from "expo-image-picker";
-// import { usePutImageMutation } from "../services/ecApi";
-// import { useGetImageQuery } from "../services/ecApi";
+import { usePutImageMutation } from "../services/ecApi";
+import { useGetImageQuery } from "../services/ecApi";
 // import * as Location from "expo-location";
 
 const Profile = ({ navigation }) => {
   const [image, setImage] = useState(null);
   // const [location, setLocation] = useState(null);
 
-  // const [putImage, result] = usePutImageMutation();
+  const [putImage, result] = usePutImageMutation();
 
-  // const { data, isLoading, error, isError, refetch } = useGetImageQuery();
+  const { data, isLoading, error, isError, refetch } = useGetImageQuery();
 
-  // const defaultImage =
-  //   "https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg?w=2000";
+  const defaultImage =
+    "https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg?w=2000";
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -76,7 +76,7 @@ const Profile = ({ navigation }) => {
       <Header title="Mi Perfil" />
 
       <View style={{ alignItems: "center", marginTop: 15 }}>
-       
+        {isLoading ? (
           <View
             style={{
               flex: 1,
@@ -90,21 +90,23 @@ const Profile = ({ navigation }) => {
               color="#0000ff"
             />
           </View>
-  
+        ) : (
           <Image
             style={styles.image}
-            
+            source={{
+              uri: data ? data.image : defaultImage,
+            }}
           />
-     
+        )}
 
         <View style={styles.buttonContainer}>
           <View style={styles.containerButton}>
             <Pressable
               style={styles.containerIcon}
-              onPress={()=> openCamera()}
+              onPress={() => openCamera()}
             >
               <Entypo name="camera" size={24} color="black" />
-            </Pressable >
+            </Pressable>
             <Text style={styles.textButton}>Abrir Cámara</Text>
           </View>
           <View style={styles.containerButton}>
@@ -116,7 +118,10 @@ const Profile = ({ navigation }) => {
           {/* <View style={styles.containerButton}>
             <Pressable
               style={styles.containerIcon}
-              
+              onPress={() =>
+                // navigation.navigate("mapaLoc")
+                getCoords()
+              }
             >
               <Feather name="map" size={24} color="black" />
             </Pressable>
