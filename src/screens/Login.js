@@ -1,6 +1,6 @@
 import {  View,
     Text,
-    TextInput,
+   
     TouchableOpacity,
     StyleSheet,
     Pressable } from 'react-native';
@@ -12,7 +12,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIdToken, setUser } from "../redux/slice/authSlice";
-
+import { TextInput } from 'react-native-paper';
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -39,12 +39,14 @@ const Login = ({navigation}) => {
     <View style={styles.container}>
     <Text style={styles.title}>Inicio de Sesión</Text>
     <TextInput
+      label="Email"
       placeholder="Correo"
       style={styles.input}
       value={email}
       onChangeText={(text) => setEmail(text)}
     />
     <TextInput
+      label="Contraseña"
       placeholder="Contraseña"
       secureTextEntry
       style={styles.input}
@@ -74,7 +76,7 @@ title: {
 },
 input: {
   width: "85%",
-  height: 50,
+  height: 60,
   borderColor: colors.heavyBlue,
   borderWidth: 2,
   borderRadius: 5,

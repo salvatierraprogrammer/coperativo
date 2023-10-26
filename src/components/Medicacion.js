@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { colors } from '../theme/colors';
 import medicacion from '../data/medicacions';
+import { Avatar, Card, IconButton } from 'react-native-paper';
+
 
 const MedicationElement = () => {
   return (
     <View style={styles.card}>
       <View style={styles.rowContainer}>
-
+     
         <View style={styles.cardContainer}>
           <FlatList 
           data={medicacion}
@@ -16,13 +18,14 @@ const MedicationElement = () => {
         </View>
 
         <View style={styles.cardContainer}>
-          <Text style={styles.title}>Última medicación: 08:00</Text>
+          <Text style={styles.title}>Última medicación: 12:00</Text>
           <Text style={styles.subtitle}>- Respiridona 2mg</Text>
           <Text style={styles.subtitle}>- Balcote 1/2mg</Text>
-          <Image></Image>
+          
         </View>
       </View>
     </View>
+    
   );
 };
 

@@ -16,6 +16,7 @@ import { colors } from "../theme/colors";
 import * as ImagePicker from "expo-image-picker";
 import { usePutImageMutation } from "../services/ecApi";
 import { useGetImageQuery } from "../services/ecApi";
+import { Avatar, Card, IconButton } from 'react-native-paper';
 // import * as Location from "expo-location";
 
 const Profile = ({ navigation }) => {
@@ -84,6 +85,7 @@ const Profile = ({ navigation }) => {
               alignContent: "center",
             }}
           >
+      
             <ActivityIndicator
               style={{ flex: 1 }}
               size="large"
@@ -98,7 +100,12 @@ const Profile = ({ navigation }) => {
             }}
           />
         )}
-
+              <Card.Title
+    title="Card Title"
+    subtitle="Card Subtitle"
+    left={(props) => <Avatar.Icon {...props} icon="folder" />}
+    right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
+  />
         <View style={styles.buttonContainer}>
           <View style={styles.containerButton}>
             <Pressable
