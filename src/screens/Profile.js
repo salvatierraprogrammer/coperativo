@@ -5,7 +5,7 @@ import {
   View,
   Pressable,
   ActivityIndicator,
-  ScrollView,
+  ScrollView, Alert,
 } from "react-native";
 import React, { useState } from "react";
 import Header from "../components/Header";
@@ -17,6 +17,9 @@ import * as ImagePicker from "expo-image-picker";
 import { usePutImageMutation } from "../services/ecApi";
 import { useGetImageQuery } from "../services/ecApi";
 import { Avatar, Card, IconButton } from 'react-native-paper';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../redux/slice/authSlice";
 // import * as Location from "expo-location";
 
 const Profile = ({ navigation }) => {
@@ -26,6 +29,8 @@ const Profile = ({ navigation }) => {
   const [putImage, result] = usePutImageMutation();
 
   const { data, isLoading, error, isError, refetch } = useGetImageQuery();
+
+  const dispatch = useDispatch();
 
   const defaultImage =
     "https://img.freepik.com/premium-vector/woman-avatar-profile-round-icon_24640-14047.jpg?w=2000";
@@ -70,7 +75,24 @@ const Profile = ({ navigation }) => {
     }
   };
 
-
+  const handleLogout = async () => {
+    try {
+      dispatch(clearUser());
+      await AsyncStorage.removeItem("userEmail");
+       navigation.navigate("rootNavigation");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const onLogout = () =>
+    Alert.alert('Cerrar session?', '¿Estas seguro que deseas cerrar sesiòn?', [
+      {
+        text: 'NO',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'SI', onPress: () => handleLogout()},
+    ]);
 
   return (
     <ScrollView>
@@ -121,6 +143,13 @@ const Profile = ({ navigation }) => {
               <FontAwesome name="photo" size={24} color="black" />
             </Pressable>
             <Text style={styles.textButton}>Abrir Galería de fotos</Text>
+          </View>
+          
+          <View style={styles.containerButton}>
+            <Pressable style={styles.containerIcon} onPress={onLogout}>
+            <Entypo name="log-out" size={24} color="black" />
+            </Pressable>
+            <Text style={styles.textButton}>Cerrar Session</Text>
           </View>
           {/* <View style={styles.containerButton}>
             <Pressable

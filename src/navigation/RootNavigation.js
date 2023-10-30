@@ -5,6 +5,9 @@ import Home from '../screens/Home';
 import Medication from '../screens/Medication';
 import MedicacionDetail from '../screens/MedicacionDetail';
 import Header from '../components/Header';
+import MapaLoc from "../screens/MapaLoc";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +20,7 @@ const RootNavigation = () => {
         <Stack.Screen component={Home} name="home" />
         <Stack.Screen component={Medication} name="medications" />
         <Stack.Screen component={MedicacionDetail} name="medicacionDetail" />
-
+         <Stack.Screen name="mapaLoc" component={MapaLoc} /> 
     </Stack.Navigator>
   );
 };

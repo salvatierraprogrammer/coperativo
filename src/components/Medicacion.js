@@ -17,12 +17,12 @@ const MedicationElement = () => {
           renderItem={({ item }) => (<Text item={item} /> )}/>
         </View>
 
-        <View style={styles.cardContainer}>
+        {/* <View style={styles.cardContainer}>
           <Text style={styles.title}>Última medicación: 12:00</Text>
           <Text style={styles.subtitle}>- Respiridona 2mg</Text>
           <Text style={styles.subtitle}>- Balcote 1/2mg</Text>
           
-        </View>
+        </View> */}
       </View>
     </View>
     

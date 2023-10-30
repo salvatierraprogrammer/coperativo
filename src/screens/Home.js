@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, FlatList, Dimensions, Pressable, View, SafeAreaView, ActivityIndicator } from 'react-native';
+import { StyleSheet, FlatList,ScrollView, Dimensions, Pressable, View, SafeAreaView, ActivityIndicator } from 'react-native';
 import Header from '../components/Header';
 import MedicationElement from '../components/MedicationElement';
 import { useWindowDimensions } from 'react-native';
@@ -18,37 +18,29 @@ const Home = ({ navigation }) => {
   console.log(categories);
   // const isLoading = false;
   return (
-    <SafeAreaView style={{ marginTop: 15, flex: 1 }}>
-  { isLoading ? (
-    <View  style={{ flex:1, justifyContent: "center", alignContent: "center" }}
-    >
-    <ActivityIndicator size="large" color="#0000ff" /> 
-    </View>
-  ) : (
-  <>
-  <Header title="Home" navigation={navigation}/>
-  <View style={styles.container} >
-   <View style={styles.wideBox}>
-      {/* <Pressable onPress={() => console.log("Ver Medicacion")}> */}
-        <MedicationElement/>
-      {/* </Pressable> */}
-      <View>
-      <FlatList
-       data={categories}
-       keyExtractor={(item) => item.name} // Utiliza item.name como clave única
-       renderItem={({ item }) => (
-         <CategoryElemnt navigation={navigation} item={item} />
-       )}
-     />
-       </View>
-   </View>
- </View>
-  </>
-  )}
-     
+    <SafeAreaView style={{ flex: 1 }}>
+      {isLoading ? (
+        <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ) : (
+        <>
+          <Header title="Vivienda Asistida" navigation={navigation} />
+          <ScrollView style={styles.container}>
+          <MedicationElement />
+            <FlatList
+              data={categories}
+              keyExtractor={(item) => item.name}
+              renderItem={({ item }) => <CategoryElement navigation={navigation} item={item} />}
+            />
+            
+          </ScrollView>
+        </>
+      )}
     </SafeAreaView>
   );
 };
+ 
 
 const styles = StyleSheet.create({
   container: {
@@ -67,12 +59,13 @@ const styles = StyleSheet.create({
   wideBox: {
     backgroundColor: 'blue',
     padding: 16,
-    height: 500,
+    height: 900,
+    // width: "100%",
     marginBottom: 16,
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 4,
     },
     shadowOpacity: 0.3,

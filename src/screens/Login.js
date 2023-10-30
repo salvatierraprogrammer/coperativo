@@ -3,7 +3,7 @@ import {  View,
    
     TouchableOpacity,
     StyleSheet,
-    Pressable } from 'react-native';
+    Pressable, Alert } from 'react-native';
 import React from 'react';
 import { colors } from '../theme/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -13,10 +13,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setIdToken, setUser } from "../redux/slice/authSlice";
 import { TextInput } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [error, setError] = useState(null);
 
   const handleLogin = async () => {
     try {
@@ -25,14 +30,16 @@ const Login = ({navigation}) => {
         email,
         password
       );
-
+      AsyncStorage.setItem("userEmail", response.user.email);     
       dispatch(setUser(response.user.email));
       dispatch(setIdToken(response._tokenResponse.idToken));
       // console.log(response);
     } catch (e) {
       console.log("Error en Login", e);
+      setError("Credenciales incorrectas. Por favor, inténtelo de nuevo.");
     }
   };
+  
 
 
   return (
@@ -57,6 +64,9 @@ const Login = ({navigation}) => {
     <TouchableOpacity style={styles.button} onPress={handleLogin}>
       <Text style={styles.buttonText}>Iniciar Sesión</Text>
     </TouchableOpacity >
+      {error && (
+        <Text style={styles.errorText}>{error}</Text>
+      )}
     <Pressable onPress={()=> { navigation.navigate("registre")}} >
       <Text style={styles.registroText}>No tienes cuenta? Registrate</Text>
     </Pressable>
@@ -99,6 +109,11 @@ registroText: {
   marginTop: 30,
   fontSize: 18,
   color: colors.heavyBlue,
+},
+errorText: {
+  color: 'red',
+  fontSize: 16,
+  marginTop: 10,
 },
 });
 
