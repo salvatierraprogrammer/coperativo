@@ -5,10 +5,10 @@ import MedicationElement from '../components/MedicationElement';
 import { useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { categories } from '../data/categories';
-import CategoryElemnt from '../components/CategoryElemnt';
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
 import { useGetCategoriesQuery } from '../services/ecApi';
+import CategoryElement from '../components/CategoryElemnt';
 
 const Home = ({ navigation }) => {
   // const categories = useSelector(state => state.homeSlice.allCategories);

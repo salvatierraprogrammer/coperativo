@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import { Avatar, Modal, Portal, Button, Card, IconButton } from 'react-native-paper';
+import { Avatar, Modal, Portal, Button, Card } from 'react-native-paper';
 import { Fontisto } from '@expo/vector-icons';
 
 const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
-  const [selectedItem, setSelectedItem] = useState(item);
-
   return (
     <Portal>
       <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.modal}>
-        <Text style={styles.modalTitle}>Detalles hola</Text>
-        {selectedItem ? (
+        <Text style={styles.modalTitle}>Detalles</Text>
+        {item && (
           <Card style={styles.cardAsisten}>
             <Card.Title
-              title={selectedItem.title}
-              subtitle={selectedItem.subtitle}
-              time={selectedItem.time}
-              left={(props) => <Avatar.Image {...props} source={{ uri: selectedItem.image }} />}
+              title={item.title}
+              subtitle={item.subtitle}
+              time={item.time}
+              left={(props) => <Avatar.Image {...props} source={{ uri: item.image }} />}
               titleStyle={{ fontSize: 19, fontWeight: 'bold' }}
               subtitleStyle={{ fontSize: 16 }}
             />
             <Card.Content>
-              {selectedItem.asistencias && selectedItem.asistencias.length > 0 && (
+              {item.asistencias && item.asistencias.length > 0 && (
                 <View style={styles.asistenciaItem}>
                   <Text>Mis Asistencias:</Text>
                 </View>
               )}
-              {selectedItem.asistencias &&
-                selectedItem.asistencias.map((asistencia, index) => (
+              {item.asistencias &&
+                item.asistencias.map((asistencia, index) => (
                   <View key={index} style={styles.asistenciaItem}>
                     <View style={styles.asistenciaDetails}>
                       <Text>
@@ -41,25 +39,29 @@ const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
                     </View>
                     <View style={styles.ubicacionButtons}>
                       <Button
-                        style={styles.modalButon}
+                        style={styles.modalButton}
                         icon="map-marker"
                         mode="contained"
-                        onPress={() => navigation.navigate('mapaLoc', {
-                          longitud_ingreso: asistencia.longitud_ingreso,
-                          latitud_ingreso: asistencia.latitud_ingreso,
-                        })}
+                        onPress={() =>
+                          navigation.navigate('mapaLoc', {
+                            longitud_ingreso: asistencia.longitud_ingreso,
+                            latitud_ingreso: asistencia.latitud_ingreso,
+                          })
+                        }
                       >
                         Ubi.. Ingreso
                       </Button>
                       {asistencia.ubicacion_salida && (
                         <Button
-                          style={styles.modalButon}
+                          style={styles.modalButton}
                           icon="map-marker"
                           mode="contained"
-                          onPress={() =>  navigation.navigate('mapaLoc', {
-                            longitud_ingreso: asistencia.longitud_salida,
-                            latitud_ingreso: asistencia.latitud_salida,
-                          })}
+                          onPress={() =>
+                            navigation.navigate('mapaLoc', {
+                              longitud_ingreso: asistencia.longitud_salida,
+                              latitud_ingreso: asistencia.latitud_salida,
+                            })
+                          }
                         >
                           Ubi.. Salida
                         </Button>
@@ -69,13 +71,13 @@ const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
                 ))}
             </Card.Content>
             <Card.Content>
-              {selectedItem.tomada && selectedItem.tomada.length > 0 && (
+              {item.tomada && item.tomada.length > 0 && (
                 <View style={styles.asistenciaItem}>
                   <Text>Medicación Tomada:</Text>
                 </View>
               )}
-              {selectedItem.tomada &&
-                selectedItem.tomada.map((tomada, index) => (
+              {item.tomada &&
+                item.tomada.map((tomada, index) => (
                   <View key={index} style={styles.asistenciaItem}>
                     <View style={styles.asistenciaDetails}>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -90,19 +92,21 @@ const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
                 ))}
             </Card.Content>
             <Card.Content>
-              {selectedItem.aTomar && selectedItem.time && selectedItem.aTomar.length > 0 && (
+              {item.aTomar && item.time && item.aTomar.length > 0 && (
                 <View style={styles.asistenciaItem}>
-                  <Text>{`Hora: ${selectedItem.time}`}</Text>
+                  <Text>{`Hora: ${item.time}`}</Text>
                   <Text>Próxima medicación:</Text>
                 </View>
               )}
-              {selectedItem.aTomar &&
-                selectedItem.aTomar.map((medicacion, index) => (
+              {item.aTomar &&
+                item.aTomar.map((medicacion, index) => (
                   <View key={index} style={styles.asistenciaItem}>
                     <View style={styles.asistenciaDetails}>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <View style={styles.asistenciaContent}>
-                          <Text>  <Fontisto name="pills" size={24} color="black" /> {`${medicacion.nombreMedicacion} (mg): ${medicacion.mg}`}</Text>
+                          <Text>
+                            <Fontisto name="pills" size={24} color="black" />{` ${medicacion.nombreMedicacion} (mg): ${medicacion.mg}`}
+                          </Text>
                         </View>
                       </View>
                     </View>
@@ -115,13 +119,70 @@ const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
               </Button>
             </Card.Actions>
           </Card>
-        ) : null}
+        )}
       </Modal>
     </Portal>
   );
 };
- 
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  card: {
+    borderRadius: 25,
+    backgroundColor: '#478F8F',
+    marginBottom: 20,
+    padding: 10,
+    flexDirection: 'row',
+    shadowColor: 'black',
+    shadowOffset: {
+      width: 6,
+      height: 6,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+  cardContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: "auto",
+    width: "100%",
+  },
+  cardTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'aliceblue',
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 15,
+    marginRight: 10,
+  },
+  image2: {
+    width: 80,
+    height: 80,
+    borderRadius: 15,
+    marginLeft: 22,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  clockIcon: {
+    fontSize: 20,
+    color: 'aliceblue',
+  },
+  info: {
+    flex: 1,
+    padding: 10,
+  },
+  cardsub: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: 'aliceblue',
+  },
   modal: {
     backgroundColor: 'white',
     padding: 20,
@@ -154,5 +215,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
+
 
 export default MedicationDetailsModal;

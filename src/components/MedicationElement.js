@@ -6,6 +6,7 @@ import { medicacion } from '../data/medicacion';
 import { useNavigation } from '@react-navigation/native';
 import MedicationDetailsModal from './MedicationDetailsModal';
 import MedicationCard from './MedicationCard';
+
 const MedicationElement = () => {
   const [visible, setVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -38,26 +39,7 @@ const MedicationElement = () => {
     </Provider>
   );
 };
-//     <Provider>
-//       <View style={styles.container}>
-//         {medicacion.map((item) => (
-//           <TouchableOpacity key={item.id} style={styles.card} onPress={() => handleCardClick(item)}>
-//             <View style={styles.cardContent}>
-//               <View style={styles.info}>
-//                 <Text style={styles.cardTitle}>{item.title}</Text>
-//                 <Text style={styles.clockIcon}> {item.time}</Text>
-//                 <Text style={styles.cardsub}>{item.subtitle} </Text>
-//               </View>
-//               <Image source={{ uri: item.image }} style={styles.image} />
-//             </View>
-//           </TouchableOpacity>
-//         ))}
-//       </View>
 
-//     <MedicationDetailsModal />
-//     </Provider>
-//   );
-// };
 
 const styles = StyleSheet.create({
   container: {
@@ -151,6 +133,30 @@ const styles = StyleSheet.create({
 });
 
 export default MedicationElement;
+
+
+
+
+//     <Provider>
+//       <View style={styles.container}>
+//         {medicacion.map((item) => (
+//           <TouchableOpacity key={item.id} style={styles.card} onPress={() => handleCardClick(item)}>
+//             <View style={styles.cardContent}>
+//               <View style={styles.info}>
+//                 <Text style={styles.cardTitle}>{item.title}</Text>
+//                 <Text style={styles.clockIcon}> {item.time}</Text>
+//                 <Text style={styles.cardsub}>{item.subtitle} </Text>
+//               </View>
+//               <Image source={{ uri: item.image }} style={styles.image} />
+//             </View>
+//           </TouchableOpacity>
+//         ))}
+//       </View>
+
+//     <MedicationDetailsModal />
+//     </Provider>
+//   );
+// };
 // MedicationElement.js
 // import React, { useState } from 'react';
 // import { View, Text, StyleSheet } from 'react-native';

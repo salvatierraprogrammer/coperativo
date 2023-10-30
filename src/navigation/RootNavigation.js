@@ -20,7 +20,7 @@ const RootNavigation = () => {
         <Stack.Screen component={Home} name="home" />
         <Stack.Screen component={Medication} name="medications" />
         <Stack.Screen component={MedicacionDetail} name="medicacionDetail" />
-         <Stack.Screen name="mapaLoc" component={MapaLoc} /> 
+        <Stack.Screen component={MapaLoc} name="mapaLoc"/> 
     </Stack.Navigator>
   );
 };
