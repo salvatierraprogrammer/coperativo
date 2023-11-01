@@ -82,7 +82,7 @@ const MedicationDetailsModal = ({ visible, item, hideModal, navigation }) => {
                     <View style={styles.asistenciaDetails}>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <View style={styles.asistenciaContent}>
-                          <Text>Responsable: {tomada.subtitle}</Text>
+                          <Text >Responsable: {tomada.subtitle}</Text>
                           <Text>{`${tomada.title}, Hora: ${tomada.time}`}</Text>
                         </View>
                         <Image source={{ uri: tomada.image }} style={styles.image2} />
