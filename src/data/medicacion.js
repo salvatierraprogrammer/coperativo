@@ -7,6 +7,7 @@ export const medicacion = [
     image: "https://cdn-icons-png.flaticon.com/512/8362/8362024.png",
     asistencias: [
       {
+        id: '1',
         fecha_ingreso: '2023-10-01',
         hora_ingreso: '08:00:00',
         ubicacion_ingreso: 'Ubicación A',
@@ -19,6 +20,7 @@ export const medicacion = [
         hora_salida: '18:00:00',
       },
       {
+        id: '2',
         fecha_ingreso: '2023-10-05',
         hora_ingreso: '08:00:00',
         ubicacion_ingreso: 'Ubicación B',
