@@ -22,11 +22,11 @@ const TabNav = () => {
             <Entypo name="user" size={24} color="black" />
         ), }}
         name="profile" component={Profile}  />
-          <Tab.Screen  
+          {/* <Tab.Screen  
         options={{ tabBarIcon: () => (
             <Fontisto name="pills" size={24} color="black" />
         ), }}
-        name="medicacion" component={Medicacion}  />
+        name="medicacion" component={Medicacion}  /> */}
 
     </Tab.Navigator>
   );

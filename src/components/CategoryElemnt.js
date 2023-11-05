@@ -19,7 +19,7 @@ const CategoryElement = ({ item, navigation }) => {
         <Pressable onPress={() => onHandleItem()}>
           <View style={styles.containerBox}>
             <Image source={{ uri: item.image }} style={styles.image} /> 
-            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}> {item.name}</Text>
           </View>
         </Pressable>
       </View>

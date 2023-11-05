@@ -19,7 +19,7 @@ const Medication = ( { route, navigation} ) => {
   
 const {data, isLoading, isError } = useGetMedicacionsQuery();
 
-console.log(data);
+console.log("Data",data);
 
 
   const medicationsFilterByCategory = useSelector(
@@ -51,7 +51,7 @@ console.log(data);
         <FlatList 
             data={categoryMedicat} 
             keyExtractor={medicacions.id}
-            renderItem={({ item }) => 
+            renderItem={({ item }) =>  
             <MedicationItem navigation={navigation} item={item} />}
         />
         

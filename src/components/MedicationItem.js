@@ -21,7 +21,8 @@ const MedicationItem = ({ item, navigation } ) => {
       <Text style={width < 300 ? styles.textMin : styles.textItem}> 
         {item.usuario} 
       </Text>
-      <Image tyle={styles.image} height={80} width={80} source={{ uri: item.images[0] }} 
+      <Image tyle={styles.image} height={80} width={80} 
+      source={{ uri: item.images[0] }} 
       resizeMode="cover"
       />
       </Pressable>

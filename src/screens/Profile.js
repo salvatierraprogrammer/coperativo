@@ -122,12 +122,12 @@ const Profile = ({ navigation }) => {
             }}
           />
         )}
-              <Card.Title
+              {/* <Card.Title
     title="Card Title"
     subtitle="Card Subtitle"
     left={(props) => <Avatar.Icon {...props} icon="folder" />}
     right={(props) => <IconButton {...props} icon="dots-vertical" onPress={() => {}} />}
-  />
+  /> */}
         <View style={styles.buttonContainer}>
           <View style={styles.containerButton}>
             <Pressable

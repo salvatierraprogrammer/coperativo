@@ -9,20 +9,13 @@ const MedicationElement = () => {
   return (
     <View style={styles.card}>
       <View style={styles.rowContainer}>
-     
+
         <View style={styles.cardContainer}>
           <FlatList 
           data={medicacion}
           keyExtractor={(item) => item}
           renderItem={({ item }) => (<Text item={item} /> )}/>
         </View>
-
-        {/* <View style={styles.cardContainer}>
-          <Text style={styles.title}>Última medicación: 12:00</Text>
-          <Text style={styles.subtitle}>- Respiridona 2mg</Text>
-          <Text style={styles.subtitle}>- Balcote 1/2mg</Text>
-          
-        </View> */}
       </View>
     </View>
     

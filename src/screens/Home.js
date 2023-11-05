@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import MedicationElement from '../components/MedicationElement';
 import { useWindowDimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { categories } from '../data/categories';
+// import { categories } from '../data/categories';
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
 import { useGetCategoriesQuery } from '../services/ecApi';
@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
         <>
           <Header title="Vivienda Asistida" navigation={navigation} />
           <ScrollView style={styles.container}>
-          <MedicationElement />
+          {/* <MedicationElement /> */}
             <FlatList
               data={categories}
               keyExtractor={(item) => item.name}
